@@ -23,7 +23,7 @@ function App() {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <a href="/home" className="navbar-brand">
-            <span className="glyphicon glyphicon-home">[H]</span>
+            <span className="glyphicon glyphicon-home">Home</span>
           </a>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -43,7 +43,7 @@ function App() {
             </li>
           </div>
         </nav>
-
+        {JSON.stringify(process.env)}
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
