@@ -53,11 +53,11 @@ const BuyListExecute = props => {
 
     return (
         <div>
-            <Link to={`/creator/buylist/${buyListId}`}>
-                Create list
-            </Link>
+            <button className="m-3 btn btn-sm btn-primary" onClick={()=>{props.history.push("/creator/buylist/"+buyListId)} }>
+                  Create list
+            </button>
 
-            <h2>List #{buyList.id} {buyList.name}</h2>
+            <h3>List #{buyList.id} {buyList.name} {buyList.description}</h3>
             
             <div className="row">
                 <div className="col">   

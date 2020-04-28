@@ -8,6 +8,7 @@ const BuyLists = () => {
   const [currentBuyList, setCurrentBuyList] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchName, setSearchName] = useState("");
+  const [message, setMessage] = useState("Loading...");
 
   const history = useHistory();
 
@@ -24,6 +25,7 @@ const BuyLists = () => {
     ListDataService.getAll("BUYLIST")
       .then(response => {
         setBuyLists(response.data);
+        setMessage("");
         //console.log(response.data);
       })
       .catch(e => {
@@ -50,6 +52,8 @@ const BuyLists = () => {
         console.log(e);
       });
   };
+
+
 
   return (
     <div className="row">
@@ -80,7 +84,7 @@ const BuyLists = () => {
         <h4>Buy Lists</h4>
 
         <button className="m-3 btn btn-sm btn-success" onClick={addBuyList}>
-          Add buy list
+          Add new list
         </button>
 
         <ul className="list-group">
@@ -129,31 +133,25 @@ const BuyLists = () => {
               {currentBuyList.active ? "Active" : "Pending"}
             </div>
 
-            <Link
-              to={"/buylists/" + currentBuyList.id}
-              className="badge badge-warning"
-            >
-              Edit
-            </Link>
+            <div className="row">
+              <div className="col">
+              <button className="m-3 btn btn-sm btn-info" onClick={()=>{history.push("/buylists/"+currentBuyList.id);}}>
+                  Edit
+                </button>
+                <button className="m-3 btn btn-sm btn-primary" onClick={()=>{history.push("/creator/buylist/"+currentBuyList.id);}}>
+                  Items
+                </button>
+                <button className="m-3 btn btn-sm btn-warning" onClick={()=>{history.push("/buylists/execute/"+currentBuyList.id);}}>
+                  Execute
+                </button>
+              </div>  
+            </div>          
 
-            <Link
-              to={"/creator/buylist/" + currentBuyList.id}
-              className="badge badge-info"
-            >
-              Items
-            </Link>
-
-            <Link
-              to={"/buylists/execute/" + currentBuyList.id}
-              className="badge badge-success"
-            >
-              Execute
-            </Link>
           </div>
         ) : (
           <div>
-            <br />
-            <p>Please click on a Buy List...</p>
+            <br />    
+            {message}        
           </div>
         )}
       </div>

@@ -2,7 +2,10 @@ import React from "react";
 
 const Home = () => {
     return (
-        <h4>Prepare and buy reasonably</h4>
+        <div>
+            <h4>Prepare and buy reasonably</h4>
+            <span>{JSON.stringify(process.env)}</span>
+        </div>
     )
 }
 

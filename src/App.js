@@ -43,7 +43,7 @@ function App() {
             </li>
           </div>
         </nav>
-        {JSON.stringify(process.env)}
+        
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
