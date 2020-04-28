@@ -39,7 +39,8 @@ const AddManualItem = props => {
   }
 
   return (
-    <div className="badge">
+    <div>
+        <h4>Add item manually</h4>        
         <div className="row">
           <div className="col">
             <input
@@ -126,8 +127,8 @@ const AddManualItem = props => {
             </button>
           </div>
         </div>
-
-    </div>
+        <br/>
+    </div>    
     );
   };
   

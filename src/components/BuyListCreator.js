@@ -73,7 +73,7 @@ const BuyListCreator = props => {
     }
     return (
         <div>
-            <Link to={`/buylists/execute/${buyListId}`} className="nav-link">
+            <Link to={`/buylists/execute/${buyListId}`}>
                 Execute list
             </Link>
 {/* <button onClick={()=>refreshLists()}>Refresh</button> */}

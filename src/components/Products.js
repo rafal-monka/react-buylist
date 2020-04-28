@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
 import ItemsDataService from "../services/ItemDataService";
 import ProductDataService from "../services/ProductDataService";
   
 const Products = props => {
 //console.log("Catalog.props.parentId="+props.parentId);
   const shops = [...new Set( props.items.map(obj => obj.shop)) ];
-  const categories = [...new Set( props.items.map(obj => obj.category)) ];
+  const categories = [...new Set( props.items.map(obj => obj.category)) ].map((str, index) => ({ name: str, state: true }));
 
   const addProductToList = (product) => {
     console.log(new Date()+"addProduct");
@@ -43,11 +47,16 @@ const Products = props => {
     //@@@props.catalog = filter
   }
 
+  const categoryShowHide = (index) => {
+    categories[index].state = categories[index].state ? false : true;
+    //setCategories(categories);
+  }
+
   return (
     <div>
-      <br/>shops={JSON.stringify(shops)}
-      <br/>categories={JSON.stringify(categories)}
-      <div className="row">
+      {/* <br/>shops={JSON.stringify(shops)}
+      <br/>categories={JSON.stringify(categories)} */}
+      {/* <div className="row">
           <div className="col">
             <span className="badge badge-info" onClick={()=>filterCategory("*")}>*</span>
           </div>
@@ -58,39 +67,56 @@ const Products = props => {
           ))
           }
         
-      </div>
+      </div> */}
 
-      <table className="table table-striped table-bordered table-hover table-sm">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th></th>
-                <th>Category</th>
-                <th>Name</th>
-                <th>Shop</th>
-                <th>Unit</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-          {props.items.map((product, index) => (
-            <tr key={index}>
-              <td>{index+1}</td>
-          <td>{props.parentId !== null ? 
-              <button className="badge badge-success" onClick={() => addProductToList(product)}>+</button>
-              :
-              <button className="badge badge-danger" onClick={() => deleteProduct(product.id)}>-</button>              
-              }</td>
-              <td>{product.category}</td>
-              <td>{product.name}</td>
-              <td>{product.shop}</td>
-              <td>{product.unit}</td>
-              <td>{product.price}</td>
-            </tr> 
-          ))}
-        </tbody>
-      </table>
-
+      <h4>Choose product from catalog</h4>
+      <Accordion defaultActiveKey="0">
+      {categories.map((category, index) => (
+        <Card key={index}>
+        <Card.Header>
+        <Accordion.Toggle as={Button} variant="link" eventKey={index}>
+          {category.name}
+        </Accordion.Toggle>
+      </Card.Header>  
+      <Accordion.Collapse eventKey={index}>
+        <Card.Body>
+          {/* <div><button onClick={()=>categoryShowHide(index)}>*</button>Category <b></b></div> */}
+          <table className="table table-striped table-bordered table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th></th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Shop</th>
+                    <th>Unit</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+              {props.items.filter((item) => item.category === category.name).map((product, index) => (
+                <tr key={index}>
+                  <td>{index+1}</td>
+              <td>{props.parentId !== null ? 
+                  <button className="badge badge-success" onClick={() => addProductToList(product)}>Add</button>
+                  :
+                  <button className="badge badge-danger" onClick={() => deleteProduct(product.id)}>Remove</button>              
+                  }</td>
+                  <td>{product.category}</td>
+                  <td>{product.name}</td>
+                  <td>{product.shop}</td>
+                  <td>{product.unit}</td>
+                  <td>{product.price}</td>
+                </tr> 
+              ))}
+            </tbody>
+          </table>
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      ))}
+    </Accordion>
+    <br/>
     </div>
   );
 };

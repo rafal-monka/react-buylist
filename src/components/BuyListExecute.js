@@ -53,7 +53,7 @@ const BuyListExecute = props => {
 
     return (
         <div>
-            <Link to={`/creator/buylist/${buyListId}`} className="nav-link">
+            <Link to={`/creator/buylist/${buyListId}`}>
                 Create list
             </Link>
 

@@ -46,6 +46,7 @@ const ChooseRecipe = props => {
 
     return (
         <div>
+            <h4>Select items from recipe</h4>
             <select onChange={handleSelectChange} value={selectedRecipeId}>
               { recipes.map((recipe, index) => (
                 <option value={recipe.id} key={recipe.id} > 
