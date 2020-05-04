@@ -14,7 +14,6 @@ const Recipes = () => {
         ListDataService.getAll("RECIPE")
           .then(response => {
             setRecipes(response.data);
-            //console.log(response.data);
           })
           .catch(e => {
             console.log(e);

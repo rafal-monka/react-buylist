@@ -3,7 +3,11 @@ import ListDataService from "../services/ListDataService";
 
 const BuyListAdd = () => {
 
-  const [buyList, setBuyList] = useState({});
+  const initBuyList = {
+      name: "",
+      description: ""
+  }
+  const [buyList, setBuyList] = useState(initBuyList);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = event => {
@@ -27,17 +31,11 @@ const BuyListAdd = () => {
           active: response.data.active
         });
         setSubmitted(true);
-        //console.log(response.data);
       })
       .catch(e => {
         console.log(e);
       });
   };
-
-  // const newBuyList = () => {
-  //   setBuyList(initialBuyListState);
-  //   setSubmitted(false);
-  // };
 
   return (
     <div className="submit-form">

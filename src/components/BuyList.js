@@ -15,7 +15,6 @@ const BuyList = props => {
     ListDataService.get(id)
       .then(response => {
         setCurrentBuyList(response.data);
-        //console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -42,7 +41,6 @@ const BuyList = props => {
     ListDataService.update(currentBuyList.id, data)
       .then(response => {
         setCurrentBuyList({ ...currentBuyList, active: status });
-        //console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -52,7 +50,6 @@ const BuyList = props => {
   const updateBuyList = () => {
     ListDataService.update(currentBuyList.id, currentBuyList)
       .then(response => {
-        //console.log(response.data);
         setMessage("The Buy List was updated successfully!");
       })
       .catch(e => {
@@ -63,13 +60,14 @@ const BuyList = props => {
   const deleteBuyList = () => {
     ListDataService.remove(currentBuyList.id)
       .then(response => {
-        //console.log(response.data);
         props.history.push("/buylists");
       })
       .catch(e => {
         console.log(e);
       });
   };
+
+  
 
   return (
     <div>

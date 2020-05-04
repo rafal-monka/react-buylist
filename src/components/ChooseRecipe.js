@@ -15,7 +15,6 @@ const ChooseRecipe = props => {
           .then(response => {
             setRecipes(response.data);
             setSelectedRecipeId(response.data[0].id)
-            //console.log(response.data);
           })
           .catch(e => {
             console.log(e);
@@ -31,12 +30,8 @@ const ChooseRecipe = props => {
             sourceid: selectedRecipeId,
             destid: props.buyListId
         }
-        console.log(new Date()+":"+JSON.stringify(selectedRecipeId));  
-        console.log(new Date()+":"+JSON.stringify(data));
-
         ExtraDataService.copyItemsFromRecipeToBuyList(data)
             .then(response => {
-                console.log(response.data);
                 props.refresh();
             })
             .catch(e => {
@@ -46,7 +41,7 @@ const ChooseRecipe = props => {
 
     return (
         <div>
-            <h4>Select items from recipe</h4>
+            <h4>Select recipe</h4>
             <select onChange={handleSelectChange} value={selectedRecipeId}>
               { recipes.map((recipe, index) => (
                 <option value={recipe.id} key={recipe.id} > 

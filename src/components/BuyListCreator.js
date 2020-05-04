@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Items from "./Items";
-import Products from "./Products";
+import ProductItems from "./ProductItems";
 import AddManualItem from "./AddManualItem";
 import ChooseRecipe from "./ChooseRecipe";
+import UpdatePrices from "./UpdatePrices";
 import ListDataService from "../services/ListDataService";
 import ItemDataService from "../services/ItemDataService";
 import ProductDataService from "../services/ProductDataService";
@@ -45,13 +45,25 @@ const BuyListCreator = props => {
         ItemDataService.getItems(buylistid) 
         .then(response => {
             setItems(response.data);
-            //console.log(response.data);
         })
         .catch(e => {
             console.log(e);
         });
     }
 
+    //retrieve items of buy list
+    const clearBuyList = () => {   
+        if (window.confirm("Do you want to delete all items from list?")) {     
+            ItemDataService.deleteAllItemsFromList(buyListId) 
+            .then(response => {
+                retrieveItems(buyListId);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        }
+    }
+    
     //retrieve products not on list
     const retrieveProducts = buylistid => {
         ProductDataService.getProductsNotOnList(buylistid)
@@ -67,20 +79,35 @@ const BuyListCreator = props => {
     
       //refresh both lists
     const refreshLists = () => {
-        //console.log("refreshLists"+new Date());
         retrieveItems(buyListId);
         retrieveProducts(buyListId);
     }
     return (
         <div>
 
-            <button className="m-3 btn btn-sm btn-warning" onClick={()=>{props.history.push("/buylists/execute/"+buyListId)} }>
-                  Execute list
-            </button>
 {/* <button onClick={()=>refreshLists()}>Refresh</button> */}
 
-            <h3>List #{buyList.id} {buyList.name} {buyList.description}</h3>
+            <h3>List #{buyList.id} {buyList.name} {buyList.description}            
+                <button className="m-3 btn btn-sm btn-warning" onClick={()=>{props.history.push("/buylists/execute/"+buyListId)} }>
+                    Execute list
+                </button>            
+            </h3>
             
+            <div className="row">
+                <div className="col">   
+                    <Items items={items} refresh={refreshLists} />
+                </div>
+            </div>
+
+            {items.length > 0 ? 
+                <div className="row">
+                    <div className="col"> 
+                        <UpdatePrices listId={buyList.id} refresh={()=>retrieveItems(buyListId)}/>
+                        <button className="m-3 btn btn-sm btn-danger" onClick={clearBuyList}>Clear list</button>
+                    </div>
+                </div>
+            : ""}
+
             <div className="row">
                 <div className="col">
                     <AddManualItem parentId={buyList.id} refresh={refreshLists}/>
@@ -93,15 +120,10 @@ const BuyListCreator = props => {
                 </div>
             </div>
 
+            <h4>Choose from catalog</h4>
             <div className="row">
                 <div className="col">   
-                    <Items items={items} refresh={refreshLists} />
-                </div>
-            </div>
-
-            <div className="row">
-                <div className="col">   
-                    <Products parentId={buyList.id} 
+                    <ProductItems parentId={buyList.id} 
                               parentType="BUYLIST" 
                               items={products} 
                                refresh={refreshLists}/>

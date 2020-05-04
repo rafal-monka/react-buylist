@@ -9,17 +9,22 @@ const getItems = parentid => {
 };
 
 const deleteItem = id => {
-  //console.log("ItemsDataService.deleteItem"+id);
   return http.delete(`/items/${id}`);
 };
 
+const deleteAllItemsFromList = listid => {
+  return http.delete(`/items/all/${listid}`);
+};
+
 const updateItemName = (id, newName) => {
-  //console.log("ItemsDataService.updateItem"+id+newName);
   return http.put(`/items/${id}`, {name: newName});
 };
 
+const updateItemAmount = (item, newAmount) => {
+  return http.put(`/items/${item.id}`, {amount: newAmount, value: newAmount * item.price});
+};
+
 const updateItemStatus = (id, newStatus) => {
-  //console.log("ItemsDataService.updateItem"+id+newName);
   return http.put(`/items/${id}`, {status: newStatus});
 };
 
@@ -28,5 +33,7 @@ export default {
   getItems, 
   deleteItem,
   updateItemName,
-  updateItemStatus
+  updateItemAmount,
+  updateItemStatus,
+  deleteAllItemsFromList
 };

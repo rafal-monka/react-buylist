@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import ItemsExecute from "./ItemsExecute";
 import ListDataService from "../services/ListDataService";
 import ItemDataService from "../services/ItemDataService";
@@ -39,7 +38,6 @@ const BuyListExecute = props => {
         ItemDataService.getItems(buylistid) 
         .then(response => {
             setItems(response.data);
-            //console.log(response.data);
         })
         .catch(e => {
             console.log(e);
@@ -53,17 +51,19 @@ const BuyListExecute = props => {
 
     return (
         <div>
-            <button className="m-3 btn btn-sm btn-primary" onClick={()=>{props.history.push("/creator/buylist/"+buyListId)} }>
-                  Create list
-            </button>
+            <h3>List #{buyList.id} {buyList.name} {buyList.description}            
+                <button className="m-3 btn btn-sm btn-primary" onClick={()=>{props.history.push("/creator/buylist/"+buyListId)} }>
+                    Prepare list
+                </button>
+            </h3>
 
-            <h3>List #{buyList.id} {buyList.name} {buyList.description}</h3>
-            
             <div className="row">
                 <div className="col">   
                     <ItemsExecute items={items} buyListId={buyListId} refresh={refreshList} status="ACTIVE"/>
                 </div>
             </div>
+
+            <br/>
 
             <div className="row">
                 <div className="col">   

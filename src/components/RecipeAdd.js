@@ -29,7 +29,6 @@ const RecipeAdd = () => {
           active: response.data.active
         });
         history.push("/creator/recipe/"+response.data.id);
-        //console.log(response.data);
       })
       .catch(e => {
         console.log(e);

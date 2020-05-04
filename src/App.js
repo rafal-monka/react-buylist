@@ -6,12 +6,13 @@ import './App.css';
 
 import Home from "./components/Home";
 import BuyListAdd from "./components/BuyListAdd";
-import BuyList from "./components/BuyList";
 import BuyLists from "./components/BuyLists";
+import BuyList from "./components/BuyList";
 import BuyListCreator from "./components/BuyListCreator";
 import Recipes from "./components/Recipes.js";
 import RecipeAdd from "./components/RecipeAdd.js";
 import RecipeCreator from "./components/RecipeCreator";
+import Products from "./components/Products";
 import Product from "./components/Product";
 import BuyListExecute from "./components/BuyListExecute";
 
@@ -55,7 +56,8 @@ function App() {
             <Route exact path="/recipes" component={Recipes} />  
             <Route exact path="/recipes/add" component={RecipeAdd} /> 
             <Route exact path="/creator/recipe/:id" component={RecipeCreator} /> 
-            <Route exact path="/products" component={Product} />    
+            <Route exact path="/products" component={Products} />    
+            <Route exact path="/products/:id" component={Product} />
             {/* <Route exact path="/table" component={TableTest} />    */}
           </Switch>
         </div>

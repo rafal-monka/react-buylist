@@ -1,124 +1,49 @@
-import React, { useState, useEffect } from "react";
-import Accordion from 'react-bootstrap/Accordion';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
-import ItemsDataService from "../services/ItemDataService";
+import React, {useState, useEffect} from "react";
+import ProductItems from "./ProductItems";
+import ProductAdd from "./ProductAdd";
 import ProductDataService from "../services/ProductDataService";
-  
-const Products = props => {
-//console.log("Catalog.props.parentId="+props.parentId);
-  const shops = [...new Set( props.items.map(obj => obj.shop)) ];
-  const categories = [...new Set( props.items.map(obj => obj.category)) ].map((str, index) => ({ name: str, state: true }));
 
-  const addProductToList = (product) => {
-    console.log(new Date()+"addProduct");
-    var obj = {
-      parentid: props.parentId, 
-      name: product.name,
-      category: product.category,
-      shop: product.shop,
-      source: props.parentType,
-      unit: product.unit ? product.unit : "SZT",
-      price: product.price ? product.price : 0.0
-    }
+const Products = () => {
+    const [products, setProducts] = useState([]); 
+    const [categories, setCategories] = useState([]);
 
-    ItemsDataService.create(obj)
-      .then(response => {
-        props.refresh();
-    })
-    .catch(e => {
-        console.log(e);
-    });
-  }
+    useEffect(() => {
+        retrieveProduct();
+    }, []);
 
-  const deleteProduct = (id) => {
-    ProductDataService.remove(id)
-      .then(response => {
-        props.refresh();
-    })
-    .catch(e => {
-        console.log(e);
-    });  
-  }
+    //retrieve product catalog
+    const retrieveProduct = () => {
+        ProductDataService.getProductsNotOnList(null)
+            .then(response => {
+                setProducts(response.data);
+                const tmp = [...new Set( response.data.map(obj => obj.category)) ];
+                setCategories(tmp);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+    
+    return (
+        <div>
+            <h1>Products</h1>
 
-  const filterCategory = (v) => {
-    alert(v);
-    //@@@props.catalog = filter
-  }
+            <div className="row">
+                <div className="col">
+                    <ProductAdd refresh={retrieveProduct}/>
+                </div>
+            </div>
 
-  const categoryShowHide = (index) => {
-    categories[index].state = categories[index].state ? false : true;
-    //setCategories(categories);
-  }
+            <ProductItems
+                parentType="" 
+                parentId={null} 
+                items={products} 
+                categories={categories}
+                refresh={retrieveProduct}
+            />
+        </div>        
 
-  return (
-    <div>
-      {/* <br/>shops={JSON.stringify(shops)}
-      <br/>categories={JSON.stringify(categories)} */}
-      {/* <div className="row">
-          <div className="col">
-            <span className="badge badge-info" onClick={()=>filterCategory("*")}>*</span>
-          </div>
-          {categories.map((cat, index) => (
-            <div className="col" key={index}>
-              <span className="badge badge-info" onClick={()=>filterCategory(cat)}>{cat}</span>
-            </div>  
-          ))
-          }
-        
-      </div> */}
-
-      <h4>Choose product from catalog</h4>
-      <Accordion defaultActiveKey="0">
-      {categories.map((category, index) => (
-        <Card key={index}>
-        <Card.Header>
-        <Accordion.Toggle as={Button} variant="link" eventKey={index}>
-          {category.name}
-        </Accordion.Toggle>
-      </Card.Header>  
-      <Accordion.Collapse eventKey={index}>
-        <Card.Body>
-          {/* <div><button onClick={()=>categoryShowHide(index)}>*</button>Category <b></b></div> */}
-          <table className="table table-striped table-bordered table-hover table-sm">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th></th>
-                    <th>Category</th>
-                    <th>Name</th>
-                    <th>Shop</th>
-                    <th>Unit</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-              {props.items.filter((item) => item.category === category.name).map((product, index) => (
-                <tr key={index}>
-                  <td>{index+1}</td>
-              <td>{props.parentId !== null ? 
-                  <button className="badge badge-success" onClick={() => addProductToList(product)}>Add</button>
-                  :
-                  <button className="badge badge-danger" onClick={() => deleteProduct(product.id)}>Remove</button>              
-                  }</td>
-                  <td>{product.category}</td>
-                  <td>{product.name}</td>
-                  <td>{product.shop}</td>
-                  <td>{product.unit}</td>
-                  <td>{product.price}</td>
-                </tr> 
-              ))}
-            </tbody>
-          </table>
-          </Card.Body>
-        </Accordion.Collapse>
-      </Card>
-      ))}
-    </Accordion>
-    <br/>
-    </div>
-  );
-};
+    )
+}
 
 export default Products;

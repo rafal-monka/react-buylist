@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Items from "./Items";
-import Products from "./Products";
+import ProductItems from "./ProductItems";
 import AddManualItem from "./AddManualItem";
+import UpdatePrices from "./UpdatePrices";
 import ListDataService from "../services/ListDataService";
 import ItemDataService from "../services/ItemDataService";
 import ProductDataService from "../services/ProductDataService";
@@ -43,7 +44,6 @@ const RecipeCreator = props => {
         ItemDataService.getItems(recipeid) 
         .then(response => {
             setItems(response.data);
-            //console.log(response.data);
         })
         .catch(e => {
             console.log(e);
@@ -63,9 +63,24 @@ const RecipeCreator = props => {
           });
       };
     
-      //refresh both lists
+    // const updateRecipeItemsPriceFromProducts = () => {
+    //     if (window.confirm("Do you want to update prices?")) {
+    //         var data = {
+    //             recipeid: recipeId
+    //         }
+    //         ExtraDataService.updateRecipeItemsPriceFromProducts(data)
+    //             .then(response => {
+    //                 retrieveItems(recipeId);
+    //             })
+    //             .catch(e => {
+    //                 console.log(e);
+    //             });    
+    //     }
+    // }
+
+
+    //refresh both lists
     const refreshLists = () => {
-        //console.log("refreshLists"+new Date());
         retrieveItems(recipeId);
         retrieveProducts(recipeId);
     }
@@ -77,13 +92,7 @@ const RecipeCreator = props => {
             </Link> */}
 {/* <button onClick={()=>refreshLists()}>Refresh</button> */}
 
-            <h2>Recipe #{recipe.id} {recipe.name}</h2>
-            
-            <div className="row">
-                <div className="col"> 
-                    <AddManualItem parentId={recipe.id} refresh={refreshLists}/>
-                </div>
-            </div>
+            <h2>Recipe #{recipe.id} {recipe.name}</h2>        
 
             <div className="row">
                 <div className="col">   
@@ -91,9 +100,21 @@ const RecipeCreator = props => {
                 </div>
             </div>
 
+            {/* <button className="m-3 btn btn-sm btn-warning" onClick={updateRecipeItemsPriceFromProducts}>
+                  Update prices
+            </button> */}
+            <UpdatePrices listId={recipe.id} refresh={()=>retrieveItems(recipeId)}/>
+
+            <div className="row">
+                <div className="col"> 
+                    <AddManualItem parentId={recipe.id} refresh={refreshLists}/>
+                </div>
+            </div>
+
+            <h4>Choose product from catalog</h4>
             <div className="row">
                 <div className="col">   
-                    <Products 
+                    <ProductItems 
                         parentType="RECIPE" 
                         parentId={recipe.id} 
                         items={products}                          

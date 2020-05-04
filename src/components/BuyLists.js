@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ListDataService from "../services/ListDataService";
-import { Link, useHistory  } from "react-router-dom";
+import { useHistory  } from "react-router-dom";
 
 const BuyLists = () => {
   
@@ -26,7 +26,6 @@ const BuyLists = () => {
       .then(response => {
         setBuyLists(response.data);
         setMessage("");
-        //console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -46,7 +45,6 @@ const BuyLists = () => {
     ListDataService.findByName(searchName)
       .then(response => {
         setBuyLists(response.data);
-        //console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -165,7 +163,6 @@ export default BuyLists;
 //   if (window.confirm("Czy na pewno usunąć wszystkie listy?")) {
 //     ListDataService.removeAll()
 //       .then(response => {
-//         //console.log(response.data);
 //         refreshList();
 //       })
 //       .catch(e => {

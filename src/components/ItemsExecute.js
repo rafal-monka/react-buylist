@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 
 import ItemDataService from "../services/ItemDataService";
 //SORTTABLE - https://github.com/AllenFang/react-bootstrap-table
@@ -49,16 +49,16 @@ const Table = (props) => {
                         <td>{item.category}</td>
                         <td nowrap="true">{item.name}</td>
                         <td>{item.source}</td>
-                        <td>{item.price}</td>
-                        <td>{item.amount}</td>
+                        <td style={{textAlign: "right"}}>{item.price}</td>
+                        <td style={{textAlign: "right"}}>{item.amount}</td>
                         <td>{item.unit}</td>
-                        <td>{item.value}</td>
+                        <td style={{textAlign: "right"}}>{item.value}</td>
                         <td nowrap="true">{item.createdAt}</td>
                     </tr>
                 )) }
                 <tr>
                     <td colSpan="9">Total</td>
-                    <td>{total}</td>
+                    <td style={{textAlign: "right"}}>{total}</td>
                     <td></td>
                 </tr>
                 </tbody>
@@ -107,13 +107,8 @@ export default ItemsExecute;
     //     // const { name, value } = event.target;
     //     // setCurrentBuyList({ ...currentBuyList, [name]: value });
     //     const { name, value } = event.target;
-    //     // console.log(name);
     //     let field = name.substr(0,name.indexOf("-"));
     //     let index = name.substr(name.indexOf("-")+1);
-    //     // console.log(field);
-    //     // console.log(index);
-    //     // console.log(value);
     //     filteredItems[index][field] = value;
     //     filteredItems[index].value = filteredItems[index].price * filteredItems[index].amount;
-    //     console.log(filteredItems);
     // } 

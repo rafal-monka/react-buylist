@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ProductDataService from "../services/ProductDataService";
 
 const ProductAdd = props => {
-    //console.log("ProductAdd");
     var initProduct = {
       name: "",
       category: "",
@@ -19,7 +18,6 @@ const ProductAdd = props => {
     })
 
     const addProduct = () => {
-        console.log(manualItem);
         if (manualItem.name === "" || manualItem.category === "") {
           alert("Name and category are required.");
           return;

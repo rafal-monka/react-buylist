@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ItemsDataService from "../services/ItemDataService";
 
 const AddManualItem = props => {
-    //console.log("AddItem.props.parentId="+props.parentId);
     var initItem = {
       parentid: props.parentId,
       name: "",
@@ -22,9 +21,6 @@ const AddManualItem = props => {
     })
 
     const addManualItemToList = () => {
-      // console.log(manualItem);
-      // return;
-      //   console.log("addManualItemToBuyList"+new Date());
       if (manualItem.name === "" || manualItem.category === "") {
         alert("Name and category are required.");
         return;
