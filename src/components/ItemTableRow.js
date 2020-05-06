@@ -47,7 +47,7 @@ const ItemTableRow = props => {
             <td>{item.source}</td>
             <td style={{textAlign: "right"}}>{item.price}</td>
             <td style={{textAlign: "right"}}>
-            {item.amount}&nbsp;&nbsp;<button className="badge badge-primary" onClick={()=>changeValue(item, -1)}>-</button>&nbsp;<button className="badge badge-primary" onClick={()=>changeValue(item, 1)}>+</button>
+            <span style={{color: item.amount>0.0?"black":"red"}}>{item.amount}</span>&nbsp;&nbsp;<button className="badge badge-primary" onClick={()=>changeValue(item, -1)}>-</button>&nbsp;<button className="badge badge-primary" onClick={()=>changeValue(item, 1)}>+</button>
             </td>
             <td>{item.unit}</td>
             <td style={{textAlign: "right"}}>{item.value}</td>
