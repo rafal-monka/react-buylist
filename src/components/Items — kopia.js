@@ -4,6 +4,7 @@ import ItemDataService from "../services/ItemDataService";
 
 const Items = props => {
     let filteredItems = props.items;
+    //array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
     const total = filteredItems.reduce((a,b) => +a + +b.value, 0);
     let tmp = filteredItems.map((item, index)=>{return item.amount});  
     console.log(tmp);  
