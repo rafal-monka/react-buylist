@@ -3,8 +3,6 @@ import ItemDataService from "../services/ItemDataService";
 //SORTTABLE - https://github.com/AllenFang/react-bootstrap-table
 
 const ItemTableRow = props => {
-    let item_z_props = props.item;
-
     const [item, setItem] = useState(props.item);
     let index = props.index;
 

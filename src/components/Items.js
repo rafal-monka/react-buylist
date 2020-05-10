@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import ItemTableRow from "./ItemTableRow";
-import ItemDataService from "../services/ItemDataService";
 //SORTTABLE - https://github.com/AllenFang/react-bootstrap-table
 
 const Items = props => {
