@@ -52,11 +52,11 @@ const Items = props => {
                             <th>Category</th>
                             <th>Name</th>
                             <th>Source</th>
-                            <th>Price</th>
                             <th>Amount</th>
                             <th>Unit</th>
+                            <th>Price</th>
                             <th>Value</th>
-                            <th>Date</th>
+                            {/* <th>Date</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -66,7 +66,7 @@ const Items = props => {
                     <tr>
                         <td colSpan="9">Total</td>
                         <td style={{textAlign: "right"}}>{total}</td>
-                        <td></td>
+                        {/* <td></td> */}
                     </tr>
                     </tbody>
                 </table>

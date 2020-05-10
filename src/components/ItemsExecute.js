@@ -28,12 +28,12 @@ const Table = (props) => {
                         <th>Shop</th>
                         <th>Category</th>
                         <th>Name</th>
-                        <th>Source</th>
-                        <th>Price</th>
                         <th>Amount</th>
                         <th>Unit</th>
+                        <th>Price</th>
                         <th>Value</th>
-                        <th>Date</th>
+                        <th>Source</th>
+                        {/* <th>Date</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -41,23 +41,23 @@ const Table = (props) => {
                     <tr key={index}>
                         <td>{index+1}</td>
                         <td>{item.status === "ACTIVE" ?
-                            <button className="badge badge-warning" onClick={() => markItem(item, "BOUGHT")}>*</button>
+                            <button className="badge badge-warning" onClick={() => markItem(item, "BOUGHT")}><span style={{fontSize:"11px"}}>+</span></button>
                             :
-                            <button className="badge badge-info" onClick={() => markItem(item, "ACTIVE")}>^</button>}
+                            <button className="badge badge-info" onClick={() => markItem(item, "ACTIVE")}><span style={{fontSize:"11px"}}>^</span></button>}
                         </td>
-                        <td>{item.shop}</td>
-                        <td>{item.category}</td>
+                        <td>{item.shop.toUpperCase()}</td>
+                        <td>{item.category.toUpperCase()}</td>
                         <td nowrap="true">{item.name}</td>
-                        <td>{item.source}</td>
-                        <td style={{textAlign: "right"}}>{item.price}</td>
                         <td style={{textAlign: "right"}}>{item.amount}</td>
-                        <td>{item.unit}</td>
+                        <td>{item.unit.toLowerCase()}</td>
+                        <td style={{textAlign: "right"}}>{item.price}</td>
                         <td style={{textAlign: "right"}}>{item.value}</td>
-                        <td nowrap="true">{item.createdAt}</td>
+                        <td><i>{item.source}</i></td>
+                        {/* <td nowrap="true">{item.createdAt}</td> */}
                     </tr>
                 )) }
                 <tr>
-                    <td colSpan="9">Total</td>
+                    <td colSpan="8">Total</td>
                     <td style={{textAlign: "right"}}>{total}</td>
                     <td></td>
                 </tr>
@@ -75,8 +75,8 @@ const ItemsExecute = props => {
 
     return (
         <div>
-            status={props.status}    
-            <br/>shops={JSON.stringify(shops)}
+            {/* status={props.status}    <br/> */}
+            shops={JSON.stringify(shops)}
             <br/>categories={JSON.stringify(categories)} 
             <Table rows={items} refresh={props.refresh} />
         </div>

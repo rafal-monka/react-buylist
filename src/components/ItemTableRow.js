@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import ItemDataService from "../services/ItemDataService";
+import { reduceHooks } from "react-table";
 //SORTTABLE - https://github.com/AllenFang/react-bootstrap-table
 
 const ItemTableRow = props => {
@@ -34,7 +35,7 @@ const ItemTableRow = props => {
 
     return (
         (item) ?         
-            <tr key={index}>
+            <tr key={index} style={{color: item.amount > 0.0 ? "black": "red"}}>
             <td>{index+1}</td>
             <td>
                 <button className="badge badge-danger" onClick={() => deleteItem(item)}>-</button>
@@ -42,14 +43,14 @@ const ItemTableRow = props => {
             <td>{item.shop}</td>
             <td>{item.category}</td>
             <td nowrap="true">{item.name}</td>
-            <td>{item.source}</td>
-            <td style={{textAlign: "right"}}>{item.price}</td>
+            <td><i>{item.source}</i></td>
             <td style={{textAlign: "right"}}>
             <span>{item.amount}</span>&nbsp;&nbsp;<button className="badge badge-primary" onClick={()=>changeValue(item, -1)}>-</button>&nbsp;<button className="badge badge-primary" onClick={()=>changeValue(item, 1)}>+</button>
             </td>
-            <td>{item.unit}</td>
+            <td>{item.unit.toLowerCase()}</td>
+            <td style={{textAlign: "right"}}>{item.price}</td>
             <td style={{textAlign: "right"}}>{item.value}</td>
-            <td nowrap="true">{item.createdAt} / {item.updatedAt}</td>
+            {/* <td nowrap="true">{item.createdAt} / {item.updatedAt}</td> */}
             </tr>
         : ""
     );

@@ -3,7 +3,7 @@ import React from "react";
 const Home = () => {
     return (
         <div>
-            <h4>Prepare and buy reasonably</h4>
+            <h4>Do the shopping being prepared</h4>
             <pre>{JSON.stringify(process.env, null, 3)}</pre>
         </div>
     )
