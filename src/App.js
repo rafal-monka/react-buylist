@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link/*, useRouteMatch */} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from './logo.svg';
 import './App.css';
@@ -19,26 +19,27 @@ import BuyListExecute from "./components/BuyListExecute";
 //import TableTest from "./components/Table";
 
 function App() {
+  //let match = useRouteMatch();
   return (
     <Router>
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/home" className="navbar-brand">
+          <Link to={`${process.env.PUBLIC_URL}/home`} className="navbar-brand">
             <span className="glyphicon glyphicon-home">Home</span>
-          </a>
+          </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/buylists"} className="nav-link">
+              <Link to={`${process.env.PUBLIC_URL}/buylists`} className="nav-link">
                 Buy lists
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/recipes"} className="nav-link">
+              <Link to={`${process.env.PUBLIC_URL}/recipes`} className="nav-link">
                 Recipes
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/products"} className="nav-link">
+              <Link to={`${process.env.PUBLIC_URL}/products`} className="nav-link">
                 Products
               </Link>
             </li>
@@ -46,20 +47,22 @@ function App() {
         </nav>
         
         <div className="container mt-3">
-          <Switch>
-            <Route exact path={["/", "/home"]} component={Home} />
-            <Route exact path={"/buylists"} component={BuyLists} />
-            <Route exact path="/buylists/add" component={BuyListAdd} />
-            <Route exact path="/buylists/:id" component={BuyList} />
-            <Route exact path="/buylists/execute/:id" component={BuyListExecute} />  
-            <Route exact path="/creator/buylist/:id" component={BuyListCreator} />  
-            <Route exact path="/recipes" component={Recipes} />  
-            <Route exact path="/recipes/add" component={RecipeAdd} /> 
-            <Route exact path="/creator/recipe/:id" component={RecipeCreator} /> 
-            <Route exact path="/products" component={Products} />    
-            <Route exact path="/products/:id" component={Product} />
-            {/* <Route exact path="/table" component={TableTest} />    */}
-          </Switch>
+
+            <Switch>
+              <Route exact path={`${process.env.PUBLIC_URL}/buylists`} component={BuyLists} />
+              <Route exact path={`${process.env.PUBLIC_URL}/buylists/add`} component={BuyListAdd} />
+              <Route exact path={`${process.env.PUBLIC_URL}/buylists/execute/:id`} component={BuyListExecute} />  
+              <Route exact path={`${process.env.PUBLIC_URL}/buylists/creator/:id`} component={BuyListCreator} />  
+              <Route path={`${process.env.PUBLIC_URL}/buylists/:id`} component={BuyList} />
+              <Route exact path={`${process.env.PUBLIC_URL}/recipes`} component={Recipes} />  
+              <Route exact path={`${process.env.PUBLIC_URL}/recipes/add`} component={RecipeAdd} /> 
+              <Route path={`${process.env.PUBLIC_URL}/recipes/creator/:id`} component={RecipeCreator} /> 
+              <Route exact path={`${process.env.PUBLIC_URL}/products`} component={Products} />    
+              <Route path={`${process.env.PUBLIC_URL}/products/:id`} component={Product} />
+              <Route exact path={["/", `${process.env.PUBLIC_URL}/home`]} component={Home} />
+              {/* <Route exact path="/table" component={TableTest} />    */}
+            </Switch>
+
         </div>
       </div>
     </Router>

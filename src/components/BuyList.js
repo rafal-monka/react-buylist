@@ -60,7 +60,7 @@ const BuyList = props => {
   const deleteBuyList = () => {
     ListDataService.remove(currentBuyList.id)
       .then(response => {
-        props.history.push("/buylists");
+        props.history.push(process.env.PUBLIC_URL+"/buylists");
       })
       .catch(e => {
         console.log(e);

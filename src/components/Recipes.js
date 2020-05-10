@@ -21,11 +21,11 @@ const Recipes = () => {
     };
 
     const addRecipe = () => {
-      history.push("/recipes/add");  
+      history.push(process.env.PUBLIC_URL+"/recipes/add");  
     }
 
     const gotoRecipe = (id) => {
-      history.push("/creator/recipe/"+id); 
+      history.push(process.env.PUBLIC_URL+"/recipes/creator/"+id); 
     }
 
     return (

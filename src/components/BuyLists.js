@@ -38,7 +38,7 @@ const BuyLists = () => {
   };
 
   const addBuyList = () => {
-    history.push("/buylists/add");
+    history.push(process.env.PUBLIC_URL+"/buylists/add");
   }
 
   const findByName = () => {
@@ -133,13 +133,13 @@ const BuyLists = () => {
 
             <div className="row">
               <div className="col">
-              <button className="m-3 btn btn-sm btn-info" onClick={()=>{history.push("/buylists/"+currentBuyList.id);}}>
+              <button className="m-3 btn btn-sm btn-info" onClick={()=>{history.push(process.env.PUBLIC_URL+"/buylists/"+currentBuyList.id);}}>
                   Edit
                 </button>
-                <button className="m-3 btn btn-sm btn-primary" onClick={()=>{history.push("/creator/buylist/"+currentBuyList.id);}}>
+                <button className="m-3 btn btn-sm btn-primary" onClick={()=>{history.push(process.env.PUBLIC_URL+"/buylists/creator/"+currentBuyList.id);}}>
                   Items
                 </button>
-                <button className="m-3 btn btn-sm btn-warning" onClick={()=>{history.push("/buylists/execute/"+currentBuyList.id);}}>
+                <button className="m-3 btn btn-sm btn-warning" onClick={()=>{history.push(process.env.PUBLIC_URL+"/buylists/execute/"+currentBuyList.id);}}>
                   Execute
                 </button>
               </div>  

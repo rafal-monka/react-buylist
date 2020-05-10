@@ -33,7 +33,7 @@ const ProductItems = props => {
 
   //edit
   const editProduct = (product) => {
-      history.push("/products/"+product.id);
+      history.push(process.env.PUBLIC_URL+"/products/"+product.id);
   }
 
   return (

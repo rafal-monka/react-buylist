@@ -52,7 +52,7 @@ const BuyListExecute = props => {
     return (
         <div>
             <h3>List #{buyList.id} {buyList.name} {buyList.description}            
-                <button className="m-3 btn btn-sm btn-primary" onClick={()=>{props.history.push("/creator/buylist/"+buyListId)} }>
+                <button className="m-3 btn btn-sm btn-primary" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/creator/"+buyListId)} }>
                     Prepare list
                 </button>
             </h3>

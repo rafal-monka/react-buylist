@@ -28,7 +28,7 @@ const RecipeAdd = () => {
           description: response.data.description,
           active: response.data.active
         });
-        history.push("/creator/recipe/"+response.data.id);
+        history.push(process.env.PUBLIC_URL+"/recipes/creator/"+response.data.id);
       })
       .catch(e => {
         console.log(e);

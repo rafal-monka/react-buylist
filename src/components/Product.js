@@ -70,14 +70,14 @@ const Product = props => {
   };
 
   const GotoProduct = (id) => {
-    props.history.push("/products/"+id);    
+    props.history.push(process.env.PUBLIC_URL+"/products/"+id);    
   }
 
   const deleteProduct = () => {
     if (window.confirm("Do you want to remove product?")) {
         ProductDataService.remove(currentProduct.id)
         .then(response => {
-            props.history.push("/products");
+            props.history.push(process.env.PUBLIC_URL+"/products");
         })
         .catch(e => {
             console.log(e);
