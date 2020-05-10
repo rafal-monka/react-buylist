@@ -20,13 +20,12 @@ const Table = (props) => {
     return (
         <div>
         {props.rows.length > 0 ? 
-            <table className="table table-striped table-bordered table-hover table-sm">
+            <table className="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th></th>
-                        <th>Shop</th>
-                        <th>Category</th>
+                        <th>Shop/Category</th>
                         <th>Name</th>
                         <th>Amount</th>
                         <th>Unit</th>
@@ -45,14 +44,14 @@ const Table = (props) => {
                             :
                             <button className="badge badge-info" onClick={() => markItem(item, "ACTIVE")}><span style={{fontSize:"11px"}}>^</span></button>}
                         </td>
-                        <td>{item.shop.toUpperCase()}</td>
-                        <td>{item.category.toUpperCase()}</td>
+                        <td nowrap="true"><span style={{fontSize: "8px"}}>{item.shop.toUpperCase()} / {item.category.toUpperCase()}</span></td>
+                        {/* <td><span style={{fontSize: "9px"}}></span></td> */}
                         <td nowrap="true">{item.name}</td>
                         <td style={{textAlign: "right"}}>{item.amount}</td>
                         <td>{item.unit.toLowerCase()}</td>
                         <td style={{textAlign: "right"}}>{item.price}</td>
                         <td style={{textAlign: "right"}}>{item.value}</td>
-                        <td><i>{item.source}</i></td>
+                        <td nowrap="true"><i>{item.source}</i></td>
                         {/* <td nowrap="true">{item.createdAt}</td> */}
                     </tr>
                 )) }
