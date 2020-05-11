@@ -95,7 +95,7 @@ const BuyLists = () => {
                 onClick={() => setActiveBuyList(buyList, index)}
                 key={index}
               >
-                {buyList.name} - {buyList.description} - {buyList.createdAt}
+                {buyList.name} - {buyList.description} - {buyList.active ? "Active" : "Not active"} / {buyList.createdAt}
               </li>
             ))}
         </ul>
@@ -108,7 +108,10 @@ const BuyLists = () => {
         </button> */}
 
       </div>
+
+      
       <div className="col-md-6">
+        <br/>
         {currentBuyList ? (
           <div>
             <h4>Buy List</h4>
@@ -128,7 +131,7 @@ const BuyLists = () => {
               <label>
                 <strong>Status:</strong>
               </label>{" "}
-              {currentBuyList.active ? "Active" : "Pending"}
+              {currentBuyList.active ? "Active" : "Not active"}
             </div>
 
             <div className="row">

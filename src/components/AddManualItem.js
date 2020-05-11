@@ -119,7 +119,7 @@ const AddManualItem = props => {
 
           <div className="col">
             <button onClick={addManualItemToList} className="btn btn-success">
-              Add
+              Add item
             </button>
           </div>
         </div>

@@ -7,6 +7,7 @@ import UpdatePrices from "./UpdatePrices";
 import ListDataService from "../services/ListDataService";
 import ItemDataService from "../services/ItemDataService";
 import ProductDataService from "../services/ProductDataService";
+import ExtraDataService from "../services/ExtraDataService";
 
 const BuyListCreator = props => {
     var buyListId = props.match.params.id;
@@ -75,7 +76,20 @@ const BuyListCreator = props => {
           .catch(e => {
               console.log(e);
           });
-      };
+    };
+
+    const copyActiveItemsFromBuyList = () => {
+        alert("TODO: copyActiveItemsFromBuyList");
+        return;
+
+        ExtraDataService.copyActiveItemsFromBuyList()
+        .then(response => {
+            props.refresh();
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
     
       //refresh both lists
     const refreshLists = () => {
@@ -131,6 +145,13 @@ const BuyListCreator = props => {
                 </div>
             </div>
             
+            <h4>Copy active items from another list</h4>
+            <div className="row">
+                <div className="col">
+                    <button className="m-3 btn btn-sm btn-primary" onClick={copyActiveItemsFromBuyList}>Choose list</button>
+                </div>
+            </div>
+
         </div>
     );
 };

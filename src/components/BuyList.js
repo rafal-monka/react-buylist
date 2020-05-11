@@ -30,7 +30,7 @@ const BuyList = props => {
     setCurrentBuyList({ ...currentBuyList, [name]: value });
   };
 
-  const updateActive = status => {
+  const updateStatus = status => {
     var data = {
       id: currentBuyList.id,
       name: currentBuyList.title,
@@ -102,21 +102,21 @@ const BuyList = props => {
               <label>
                 <strong>Status:</strong>
               </label>
-              {currentBuyList.active ? "Active" : "Pending"}
+              {currentBuyList.active ? "Active" : "Not active"}
             </div>
           </form>
 
           {currentBuyList.active ? (
             <button
               className="badge badge-primary mr-2"
-              onClick={() => updateActive(false)}
+              onClick={() => updateStatus(0)}
             >
               Deactivate
             </button>
           ) : (
             <button
               className="badge badge-primary mr-2"
-              onClick={() => updateActive(true)}
+              onClick={() => updateStatus(1)}
             >
               Activate
             </button>

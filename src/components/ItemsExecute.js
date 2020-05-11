@@ -4,7 +4,7 @@ import ItemDataService from "../services/ItemDataService";
 //SORTTABLE - https://github.com/AllenFang/react-bootstrap-table
 
 const Table = (props) => {
-    const total = props.rows.reduce((a,b) => +a + +b.value, 0);
+    const total = props.rows.reduce((a,b) => +a + +b.value, 0) * 10;
 
     //delete item from list
     const markItem = (item, newStatus) => {
@@ -20,7 +20,7 @@ const Table = (props) => {
     return (
         <div>
         {props.rows.length > 0 ? 
-            <table className="table table-striped table-bordered table-hover">
+            <table className="table table-striped table-bordered table-hover table-sm">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -44,7 +44,7 @@ const Table = (props) => {
                             :
                             <button className="badge badge-info" onClick={() => markItem(item, "ACTIVE")}><span style={{fontSize:"11px"}}>^</span></button>}
                         </td>
-                        <td nowrap="true"><span style={{fontSize: "8px"}}>{item.shop.toUpperCase()} / {item.category.toUpperCase()}</span></td>
+                        <td nowrap="true"><span style={{fontSize: "8px"}}>{item.shop.toUpperCase()} / <b>{item.category.toUpperCase()}</b></span></td>
                         {/* <td><span style={{fontSize: "9px"}}></span></td> */}
                         <td nowrap="true">{item.name}</td>
                         <td style={{textAlign: "right"}}>{item.amount}</td>
@@ -56,7 +56,7 @@ const Table = (props) => {
                     </tr>
                 )) }
                 <tr>
-                    <td colSpan="8">Total</td>
+                    <td colSpan="7">Total</td>
                     <td style={{textAlign: "right"}}>{total}</td>
                     <td></td>
                 </tr>

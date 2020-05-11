@@ -42,18 +42,22 @@ const ChooseRecipe = props => {
     return (
         <div>
             <h4>Select recipe</h4>
-            <select onChange={handleSelectChange} value={selectedRecipeId}>
-              { recipes.map((recipe, index) => (
-                <option value={recipe.id} key={recipe.id} > 
-                    #{recipe.id} {recipe.name} - {recipe.description} - {recipe.createdAt}
-                </option>
-              ))}
-            </select>
-
-            <button className="m-3 btn btn-sm btn-success" onClick={addRecipe}>
-                Add recipe
-            </button>
-
+            <div className="row">
+                <div className="col">
+                    <select onChange={handleSelectChange} value={selectedRecipeId} className="form-control">
+                    { recipes.map((recipe, index) => (
+                        <option value={recipe.id} key={recipe.id} > 
+                            #{recipe.id} {recipe.name} - {recipe.description} - {recipe.createdAt}
+                        </option>
+                    ))}
+                    </select>
+                </div>
+                <div className="col">
+                    <button className="m-3 btn btn-success" onClick={addRecipe}>
+                        Add recipe
+                    </button>
+                </div>
+            </div>
       </div>
     );
 };
