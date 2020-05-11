@@ -4,7 +4,7 @@ import ItemDataService from "../services/ItemDataService";
 //SORTTABLE - https://github.com/AllenFang/react-bootstrap-table
 
 const Table = (props) => {
-    const total = props.rows.reduce((a,b) => +a + +b.value, 0) * 10;
+    const total = props.rows.reduce((a,b) => +a + +b.value, 0);
 
     //delete item from list
     const markItem = (item, newStatus) => {
