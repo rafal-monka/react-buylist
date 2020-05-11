@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory  } from "react-router-dom";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
@@ -8,8 +8,19 @@ import ItemsDataService from "../services/ItemDataService";
   
 const ProductItems = props => {
   const history = useHistory();
+  const [filterText, setFilterText] = useState("");
+  let arr = [...new Set( props.items.map(obj => obj.category)) ].map((str) => ( { name: str }));
+  const [categories, setCategories] = useState(arr);
+
+  useEffect(() => {
+    filterCategories(filterText);
+  }, [props]);
+
+
+
+  //setCategories();
   //const shops = [...new Set( props.items.map(obj => obj.shop)) ];
-  const categories = [...new Set( props.items.map(obj => obj.category)) ].map((str, index) => ({ name: str, state: true }));
+  //const categories = [...new Set( props.items.map(obj => obj.category)) ].map((str) => ( { name: str }));
 
   const addProductToList = (product) => {
     var obj = {
@@ -25,10 +36,25 @@ const ProductItems = props => {
     ItemsDataService.create(obj)
       .then(response => {
         props.refresh();
+        filterCategories(filterText);
     })
     .catch(e => {
         console.log(e);
     });
+  }
+
+  const filterCategories = (text = "") => {
+    if (props.items.length === 0) return; 
+    let tmp = props.items.filter((item) => 
+      (text === "" || item.name.toUpperCase().indexOf(text.toUpperCase())>-1)
+    );
+    let arr = [...new Set( tmp.map(obj => obj.category)) ].map((str) => ( { name: str }));
+    setCategories(arr);
+  }
+
+  const handleFilterTextChange = (e) => {
+    setFilterText(e.currentTarget.value);
+    filterCategories(e.currentTarget.value);
   }
 
   //edit
@@ -53,6 +79,15 @@ const ProductItems = props => {
         
       </div> */}
 
+          <input
+              type="text"
+              className="form-control"              
+              id="filterText"
+              placeholder="Filter..."
+              value={filterText}
+              onChange={handleFilterTextChange}
+              name="filterText"
+            />
       <Accordion defaultActiveKey={0}>
 
         {categories.map((category, index) => (
@@ -79,7 +114,7 @@ const ProductItems = props => {
                     </tr>
                   </thead>
                   <tbody>
-                    {props.items.filter((item) => item.category === category.name).map((product, index) => (
+                    {props.items.filter((item) => item.category === category.name && (filterText === "" || item.name.toUpperCase().indexOf(filterText.toUpperCase())>-1)).map((product, index) => (
                       <tr key={index}>
                         <td>{index+1}</td>
                     <td>{props.parentId !== null ? 
