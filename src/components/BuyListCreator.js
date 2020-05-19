@@ -124,12 +124,6 @@ const BuyListCreator = props => {
 
             <div className="row">
                 <div className="col">
-                    <AddManualItem parentId={buyList.id} refresh={refreshLists}/>
-                </div>
-            </div>
-
-            <div className="row">
-                <div className="col">
                     <ChooseRecipe buyListId={buyList.id} refresh={refreshLists}/>
                 </div>
             </div>
@@ -145,6 +139,12 @@ const BuyListCreator = props => {
                 </div>
             </div>
             
+            <div className="row">
+                <div className="col">
+                    <AddManualItem parentId={buyList.id} refresh={refreshLists}/>
+                </div>
+            </div>
+
             <h4>Copy active items from another list</h4>
             <div className="row">
                 <div className="col">

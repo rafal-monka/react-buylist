@@ -105,12 +105,6 @@ const RecipeCreator = props => {
             </button> */}
             <UpdatePrices listId={recipe.id} refresh={()=>retrieveItems(recipeId)}/>
 
-            <div className="row">
-                <div className="col"> 
-                    <AddManualItem parentId={recipe.id} refresh={refreshLists}/>
-                </div>
-            </div>
-
             <h4>Choose product from catalog</h4>
             <div className="row">
                 <div className="col">   
@@ -122,7 +116,13 @@ const RecipeCreator = props => {
                         {/* categories={categories} */}
                 </div>
             </div>
-            
+
+            <div className="row">
+                <div className="col"> 
+                    <AddManualItem parentId={recipe.id} refresh={refreshLists}/>
+                </div>
+            </div>
+                        
         </div>
     );
 };
