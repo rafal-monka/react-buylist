@@ -50,7 +50,8 @@ const AddManualItem = props => {
               name="name"
             />
           </div>
-
+        </div>
+        <div className="row">
           <div className="col">
             <input
               type="text"
@@ -63,7 +64,8 @@ const AddManualItem = props => {
               name="category"
             />
           </div>
-
+        </div>
+        <div className="row">
           <div className="col">
             <input
               type="text"
@@ -76,7 +78,8 @@ const AddManualItem = props => {
               name="shop"
             />
           </div>
-
+        </div>
+        <div className="row">
           <div className="col">
             <input
               type="text"
@@ -88,7 +91,8 @@ const AddManualItem = props => {
               name="unit"
             />
           </div>
-
+        </div>
+        <div className="row">
           <div className="col">
             <input
               type="number"
@@ -100,7 +104,8 @@ const AddManualItem = props => {
               name="price"
             />
           </div>
-
+        </div>
+        <div className="row">
           <div className="col">
             <input
               type="number"
@@ -112,11 +117,13 @@ const AddManualItem = props => {
               name="amount"
             />
           </div>
-
+        </div>
+        <div className="row">
           <div className="col">
             {manualItem.price && manualItem.amount ? Math.round(manualItem.price * manualItem.amount * 100) / 100: ""}
           </div>
-
+        </div>
+        <div className="row">
           <div className="col">
             <button onClick={addManualItemToList} className="btn btn-success">
               Add item
