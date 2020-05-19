@@ -46,7 +46,9 @@ const ProductAdd = props => {
               name="name"
             />
           </div>
+        </div>
 
+        <div className="row">
           <div className="col">
             <input
               type="text"
@@ -59,7 +61,9 @@ const ProductAdd = props => {
               name="category"
             />
           </div>
+        </div>
 
+        <div className="row">
           <div className="col">
             <input
               type="text"
@@ -72,7 +76,9 @@ const ProductAdd = props => {
               name="shop"
             />
           </div>
+        </div>
 
+        <div className="row">
           <div className="col">
             <input
               type="text"
@@ -84,7 +90,9 @@ const ProductAdd = props => {
               name="unit"
             />
           </div>
+        </div>
 
+        <div className="row"> 
           <div className="col">
             <input
               type="number"
@@ -96,6 +104,9 @@ const ProductAdd = props => {
               name="price"
             />
           </div>
+        </div>
+
+        <div className="row">
           <div className="col">
             <button onClick={addProduct} className="btn btn-success">
               Add
