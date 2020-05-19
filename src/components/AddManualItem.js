@@ -123,13 +123,12 @@ const AddManualItem = props => {
             {manualItem.price && manualItem.amount ? Math.round(manualItem.price * manualItem.amount * 100) / 100: ""}
           </div>
         </div>
-        <div className="row">
-          <div className="col">
-            <button onClick={addManualItemToList} className="btn btn-success">
-              Add item
-            </button>
-          </div>
-        </div>
+        
+        <br/>
+        <button onClick={addManualItemToList} className="btn btn-success">
+          Add item
+        </button>
+        <br/><br/>
         <br/>
     </div>    
     );

@@ -7,7 +7,7 @@ const ProductAdd = props => {
       category: "",
       shop: "",
       unit: "SZT",
-      price: 0.0
+      price: ""
     }
 
     const [manualItem, setManualItem] = useState(initProduct);
@@ -32,7 +32,7 @@ const ProductAdd = props => {
   }
 
   return (
-    <div className="badge">
+    <div>
         <div className="row">
           <div className="col">
             <input
@@ -106,13 +106,11 @@ const ProductAdd = props => {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col">
-            <button onClick={addProduct} className="btn btn-success">
-              Add
-            </button>
-          </div>
-        </div>
+        <br/>
+        <button onClick={addProduct} className="btn btn-success">
+          Add
+        </button>
+        <br/><br/>  
 
     </div>
     );
