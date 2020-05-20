@@ -83,13 +83,13 @@ const ProductItems = props => {
               type="text"
               className="form-control"              
               id="filterText"
-              placeholder="Filter..."
+              placeholder="Filter catalog..."
               value={filterText}
               onChange={handleFilterTextChange}
               name="filterText"
             />
-      <Accordion defaultActiveKey={0}>
-
+      <Accordion>
+      {/* defaultActiveKey={0} */}
         {categories.map((category, index) => (
           <Card key={index}>
 

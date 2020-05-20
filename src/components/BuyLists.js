@@ -33,8 +33,9 @@ const BuyLists = () => {
   };
 
   const setActiveBuyList = (buyList, index) => {
-    setCurrentBuyList(buyList);
-    setCurrentIndex(index);
+    history.push(process.env.PUBLIC_URL+"/buylists/creator/"+buyList.id);
+    // setCurrentBuyList(buyList);
+    // setCurrentIndex(index);
   };
 
   const addBuyList = () => {
@@ -95,11 +96,12 @@ const BuyLists = () => {
                 onClick={() => setActiveBuyList(buyList, index)}
                 key={index}
               >
-                {buyList.name} - {buyList.description} - {buyList.active ? "Active" : "Not active"} / {buyList.createdAt}
+                {buyList.name} - {buyList.description} 
               </li>
             ))}
         </ul>
 
+        {/* - {buyList.active ? "Active" : "Not active"} / {buyList.createdAt} */}
         {/* <button
           className="m-3 btn btn-sm btn-danger"
           onClick={removeAllBuyLists}

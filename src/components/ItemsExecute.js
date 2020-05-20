@@ -6,6 +6,11 @@ import ItemDataService from "../services/ItemDataService";
 const Table = (props) => {
     const total = props.rows.reduce((a,b) => +a + +b.value, 0);
 
+    const toInitCap = (str) => {
+        return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
+    } 
+    
+
     //delete item from list
     const markItem = (item, newStatus) => {
         ItemDataService.updateItemStatus(item.id, newStatus) 
@@ -44,7 +49,7 @@ const Table = (props) => {
                             :
                             <button className="badge badge-info" onClick={() => markItem(item, "ACTIVE")}><span style={{fontSize:"11px"}}>^</span></button>}
                         </td>
-                        <td nowrap="true"><span style={{fontSize: "8px"}}>{item.shop.toUpperCase()} / <b>{item.category.toUpperCase()}</b></span></td>
+                        <td nowrap="true"><span style={{fontSize: "8px"}}>{toInitCap(item.shop)} / <b>{toInitCap(item.category)}</b></span></td>
                         {/* <td><span style={{fontSize: "9px"}}></span></td> */}
                         <td nowrap="true">{item.name}</td>
                         <td style={{textAlign: "right"}}>{item.amount}</td>

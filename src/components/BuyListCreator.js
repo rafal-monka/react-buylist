@@ -101,12 +101,18 @@ const BuyListCreator = props => {
 
 {/* <button onClick={()=>refreshLists()}>Refresh</button> */}
 
-            <h3>List #{buyList.id} {buyList.name} {buyList.description}            
-                <button className="m-3 btn btn-sm btn-warning" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/execute/"+buyListId)} }>
-                    Execute list
-                </button>            
-            </h3>
-            
+            <h3>#{buyList.id} {buyList.name} {buyList.description}</h3>
+            <div className="row">
+                <div className="col">   
+                    <button className="m-3 btn btn-sm btn-primary" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/"+buyListId)} }>
+                        Edit list
+                    </button>                
+                    <button className="m-3 btn btn-sm btn-warning" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/execute/"+buyListId)} }>
+                        Execute list
+                    </button> 
+                </div>
+            </div>
+
             <div className="row">
                 <div className="col">   
                     <Items items={items} refresh={refreshLists} />
@@ -121,6 +127,8 @@ const BuyListCreator = props => {
                     </div>
                 </div>
             : ""}
+
+            <h4><i>Add items</i></h4>
 
             <div className="row">
                 <div className="col">
