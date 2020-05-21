@@ -3,13 +3,12 @@ import React from "react";
 import ItemDataService from "../services/ItemDataService";
 //SORTTABLE - https://github.com/AllenFang/react-bootstrap-table
 
-const Table = (props) => {
-    const total = props.rows.reduce((a,b) => +a + +b.value, 0);
+const toInitCap = (str) => {
+    return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
+} 
 
-    const toInitCap = (str) => {
-        return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
-    } 
-    
+const Table = (props) => {
+    const total = Math.round(props.rows.reduce((a,b) => +a + +b.value, 0)*10)/10;   
 
     //delete item from list
     const markItem = (item, newStatus) => {
@@ -74,8 +73,8 @@ const Table = (props) => {
 
 const ItemsExecute = props => {
     let items = props.items.filter(item => item.status===props.status);
-    const shops = [...new Set( items.map(obj => obj.shop)) ];
-    const categories = [...new Set( items.map(obj => obj.category)) ];
+    const shops = [...new Set( items.map(obj => toInitCap(obj.shop))) ];
+    const categories = [...new Set( items.map(obj => toInitCap(obj.category))) ];
 
     return (
         <div>
