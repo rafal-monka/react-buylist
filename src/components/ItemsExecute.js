@@ -24,48 +24,56 @@ const Table = (props) => {
     return (
         <div>
         {props.rows.length > 0 ? 
-            <table className="table table-striped table-bordered table-hover table-sm">
-                <thead>
+            <div>
+                <h4>{props.status}</h4>
+                shops={JSON.stringify(props.shops)}
+                <br/>categories={JSON.stringify(props.categories)}                 
+                <table className="table table-striped table-bordered table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th></th>
+                            <th>Shop/Category</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                            <th>Value</th>
+                            <th>Source</th>
+                            {/* <th>Date</th> */}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    { props.rows.map((item, index) => (
+                        <tr key={index}>
+                            <td>{index+1}</td>
+                            <td>{item.status === "ACTIVE" ?
+                                <span>
+                                    <button className="badge badge-warning" onClick={() => markItem(item, "BOUGHT")}><span style={{fontSize:"11px"}}>+</span></button>
+                                    &nbsp;&nbsp;&nbsp;<button className="badge" onClick={() => markItem(item, "LATER")}><span style={{fontSize:"11px"}}>?</span></button>
+                                </span>
+                                :
+                                <button className="badge badge-info" onClick={() => markItem(item, "ACTIVE")}><span style={{fontSize:"11px"}}>^</span></button>}
+                            </td>
+                            <td nowrap="true"><span style={{fontSize: "8px"}}>{toInitCap(item.shop)} / <b>{toInitCap(item.category)}</b></span></td>
+                            {/* <td><span style={{fontSize: "9px"}}></span></td> */}
+                            <td nowrap="true">{item.name}</td>
+                            <td style={{textAlign: "right"}}>{item.amount}</td>
+                            <td>{item.unit.toLowerCase()}</td>
+                            <td style={{textAlign: "right"}}>{item.price}</td>
+                            <td style={{textAlign: "right"}}>{item.value}</td>
+                            <td nowrap="true"><i>{item.source}</i></td>
+                            {/* <td nowrap="true">{item.createdAt}</td> */}
+                        </tr>
+                    )) }
                     <tr>
-                        <th>No</th>
-                        <th></th>
-                        <th>Shop/Category</th>
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Unit</th>
-                        <th>Price</th>
-                        <th>Value</th>
-                        <th>Source</th>
-                        {/* <th>Date</th> */}
+                        <td colSpan="7">Total</td>
+                        <td style={{textAlign: "right"}}>{total}</td>
+                        <td></td>
                     </tr>
-                </thead>
-                <tbody>
-                { props.rows.map((item, index) => (
-                    <tr key={index}>
-                        <td>{index+1}</td>
-                        <td>{item.status === "ACTIVE" ?
-                            <button className="badge badge-warning" onClick={() => markItem(item, "BOUGHT")}><span style={{fontSize:"11px"}}>+</span></button>
-                            :
-                            <button className="badge badge-info" onClick={() => markItem(item, "ACTIVE")}><span style={{fontSize:"11px"}}>^</span></button>}
-                        </td>
-                        <td nowrap="true"><span style={{fontSize: "8px"}}>{toInitCap(item.shop)} / <b>{toInitCap(item.category)}</b></span></td>
-                        {/* <td><span style={{fontSize: "9px"}}></span></td> */}
-                        <td nowrap="true">{item.name}</td>
-                        <td style={{textAlign: "right"}}>{item.amount}</td>
-                        <td>{item.unit.toLowerCase()}</td>
-                        <td style={{textAlign: "right"}}>{item.price}</td>
-                        <td style={{textAlign: "right"}}>{item.value}</td>
-                        <td nowrap="true"><i>{item.source}</i></td>
-                        {/* <td nowrap="true">{item.createdAt}</td> */}
-                    </tr>
-                )) }
-                <tr>
-                    <td colSpan="7">Total</td>
-                    <td style={{textAlign: "right"}}>{total}</td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         : "Lista jest pusta" }
     </div>
     )
@@ -78,10 +86,8 @@ const ItemsExecute = props => {
 
     return (
         <div>
-            {/* status={props.status}    <br/> */}
-            shops={JSON.stringify(shops)}
-            <br/>categories={JSON.stringify(categories)} 
-            <Table rows={items} refresh={props.refresh} />
+            {/* status={props.status}    <br/> */}    
+            <Table rows={items} refresh={props.refresh} status={props.status} shops={shops} categories={categories}/>
         </div>
     );
 };
