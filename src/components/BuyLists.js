@@ -96,7 +96,7 @@ const BuyLists = () => {
                 onClick={() => setActiveBuyList(buyList, index)}
                 key={index}
               >
-                {buyList.name} - {buyList.description} 
+                {buyList.name} - {buyList.description} / #{buyList.id} {buyList.active ? "Active" : "Not active"}
               </li>
             ))}
         </ul>

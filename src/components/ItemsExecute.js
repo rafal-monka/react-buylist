@@ -33,7 +33,7 @@ const Table = (props) => {
                         <tr>
                             <th>No</th>
                             <th></th>
-                            <th>Shop/Category</th>
+                            <th>Shop/Cat.</th>
                             <th>Name</th>
                             <th>Amount</th>
                             <th>Unit</th>
@@ -47,7 +47,7 @@ const Table = (props) => {
                     { props.rows.map((item, index) => (
                         <tr key={index}>
                             <td>{index+1}</td>
-                            <td>{item.status === "ACTIVE" ?
+                            <td nowrap="true">{item.status === "ACTIVE" ?
                                 <span>
                                     <button className="badge badge-warning" onClick={() => markItem(item, "BOUGHT")}><span style={{fontSize:"11px"}}>+</span></button>
                                     &nbsp;&nbsp;&nbsp;<button className="badge" onClick={() => markItem(item, "LATER")}><span style={{fontSize:"11px"}}>?</span></button>
