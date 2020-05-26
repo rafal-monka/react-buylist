@@ -5,7 +5,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 import ItemsDataService from "../services/ItemDataService";
-  
+import ProductDataService from "../services/ProductDataService";
+
 const ProductItems = props => {
   const history = useHistory();
   const [filterText, setFilterText] = useState("");
@@ -61,6 +62,20 @@ const ProductItems = props => {
   const editProduct = (product) => {
       history.push(process.env.PUBLIC_URL+"/products/"+product.id);
   }
+
+//edit
+const deleteProduct = (product) => {
+  if (window.confirm('Are you sure to DELETE a product?')) 
+  ProductDataService.remove(product.id)
+        .then(response => {
+          props.refresh();
+          filterCategories(filterText);
+      })
+      .catch(e => {
+          console.log(e);
+      });
+}  
+  
 
   return (
     <div>
@@ -120,7 +135,10 @@ const ProductItems = props => {
                     <td>{props.parentId !== null ? 
                         <button className="badge badge-success" onClick={() => addProductToList(product)}>Add</button>
                         :
-                        <button className="badge badge-primary" onClick={() => editProduct(product)}>Edit</button>              
+                        <span>
+                          <button className="badge badge-primary" onClick={() => editProduct(product)}>Edit</button>    
+                          <button className="badge badge-danger" onClick={() => deleteProduct(product)}>Del</button>           
+                        </span>
                         }</td>
                         <td>{product.category}</td>
                         <td>{product.name}</td>
