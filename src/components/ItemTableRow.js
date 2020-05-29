@@ -49,7 +49,7 @@ const ItemTableRow = props => {
             </td>
             <td>{item.unit.toLowerCase()}</td>
             <td style={{textAlign: "right"}}>{item.price}</td>
-            <td style={{textAlign: "right"}}>{item.value}</td>
+            <td style={{textAlign: "right"}}><b>{item.value}</b></td>
             {/* <td nowrap="true">{item.createdAt} / {item.updatedAt}</td> */}
             </tr>
         : ""

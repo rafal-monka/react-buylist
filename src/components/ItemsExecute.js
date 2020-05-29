@@ -61,7 +61,7 @@ const Table = (props) => {
                             <td style={{textAlign: "right"}}>{item.amount}</td>
                             <td>{item.unit.toLowerCase()}</td>
                             <td style={{textAlign: "right"}}>{item.price}</td>
-                            <td style={{textAlign: "right"}}>{item.value}</td>
+                            <td style={{textAlign: "right"}}><b>{item.value}</b></td>
                             <td nowrap="true"><i>{item.source}</i></td>
                             {/* <td nowrap="true">{item.createdAt}</td> */}
                         </tr>
