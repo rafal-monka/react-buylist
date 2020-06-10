@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory  } from "react-router-dom";
 import ListDataService from "../services/ListDataService";
 
 const BuyListAdd = () => {
@@ -9,6 +10,7 @@ const BuyListAdd = () => {
   }
   const [buyList, setBuyList] = useState(initBuyList);
   const [submitted, setSubmitted] = useState(false);
+  const history = useHistory();
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -19,7 +21,8 @@ const BuyListAdd = () => {
     var data = {
       name: buyList.name,
       type: "BUYLIST",
-      description: buyList.description
+      description: buyList.description,
+      active: 1
     };
 
     ListDataService.create(data)
@@ -30,7 +33,8 @@ const BuyListAdd = () => {
           description: response.data.description,
           active: response.data.active
         });
-        setSubmitted(true);
+        // setSubmitted(true);
+        history.push(process.env.PUBLIC_URL+"/buylists")
       })
       .catch(e => {
         console.log(e);
