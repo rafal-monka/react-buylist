@@ -78,11 +78,11 @@ const BuyListCreator = props => {
           });
     };
 
-    const copyActiveItemsFromBuyList = () => {
-        alert("TODO: copyActiveItemsFromBuyList");
+    const copyItemsBetweenLists = () => {
+        alert("TODO: copyItemsBetweenLists");
         return;
 
-        ExtraDataService.copyActiveItemsFromBuyList()
+        ExtraDataService.copyItemsBetweenLists()
         .then(response => {
             props.refresh();
         })
@@ -106,10 +106,18 @@ const BuyListCreator = props => {
                 <div className="col">   
                     <button className="m-3 btn btn-sm btn-primary" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/"+buyListId)} }>
                         Edit list
-                    </button>                
-                    <button className="m-3 btn btn-sm btn-warning" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/execute/"+buyListId)} }>
-                        Execute list
                     </button> 
+
+                    <button className="m-3 btn btn-sm btn-success" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/execute/"+buyListId)} }>
+                        &gt; Execute list
+                    </button> 
+                    
+                    {items.length > 0 ?
+                        <span> 
+                            <UpdatePrices listId={buyList.id} refresh={()=>retrieveItems(buyListId)}/>
+                            <button className="m-3 btn btn-sm btn-danger" onClick={clearBuyList}>Clear list</button>
+                        </span>
+                    : ""}
                 </div>
             </div>
 
@@ -119,14 +127,6 @@ const BuyListCreator = props => {
                 </div>
             </div>
 
-            {items.length > 0 ? 
-                <div className="row">
-                    <div className="col"> 
-                        <UpdatePrices listId={buyList.id} refresh={()=>retrieveItems(buyListId)}/>
-                        <button className="m-3 btn btn-sm btn-danger" onClick={clearBuyList}>Clear list</button>
-                    </div>
-                </div>
-            : ""}
 
             <h4><i>Add items</i></h4>
 
@@ -156,7 +156,7 @@ const BuyListCreator = props => {
             <h4>Copy active items from another list</h4>
             <div className="row">
                 <div className="col">
-                    <button className="m-3 btn btn-sm btn-primary" onClick={copyActiveItemsFromBuyList}>Choose list</button>
+                    <button className="m-3 btn btn-sm btn-primary" onClick={copyItemsBetweenLists}>Choose list</button>
                 </div>
             </div>
 
