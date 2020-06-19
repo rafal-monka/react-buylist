@@ -45,15 +45,16 @@ const Table = (props) => {
                     <tbody>
                     { props.rows.map((item, index) => (
                         <tr key={index}>
-                            <td nowrap="true">{index+1}&nbsp;{item.status === "ACTIVE" ?
+                            <td nowrap="true">{item.status === "ACTIVE" ?
                                 <button className="badge badge-warning" onClick={() => markItem(item, "LATER")}><span style={{fontSize:"11px"}}>?</span></button>
                                 :
                                 <button className="badge badge-info" onClick={() => markItem(item, "ACTIVE")}><span style={{fontSize:"11px"}}>^</span></button>}
+                                &nbsp;{index+1}
                             </td>
                             {/* <td><span style={{fontSize: "9px"}}></span></td> */}
                             <td nowrap="true">
                                 {item.status === "ACTIVE" ?
-                                <button className="badge badge-success" onClick={() => markItem(item, "BOUGHT")}>{item.name}</button>
+                                <button className="badge badge-success" onClick={() => markItem(item, "BOUGHT")}><big>{item.name}</big></button>
                                 :
                                 <span>{item.name}</span>}
                             </td>

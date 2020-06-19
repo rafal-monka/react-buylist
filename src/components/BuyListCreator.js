@@ -78,13 +78,11 @@ const BuyListCreator = props => {
           });
     };
 
-    const copyItemsBetweenLists = () => {
-        alert("TODO: copyItemsBetweenLists");
-        return;
-
-        ExtraDataService.copyItemsBetweenLists()
+    const copyItemsBetweenLists = (destid) => {
+        let buylistid = prompt('Please enter id of SOURCE list. \nItems marked \'LATER\' will be copied.')
+        ExtraDataService.copyItemsBetweenLists(buylistid, destid, 'LATER')
         .then(response => {
-            props.refresh();
+            retrieveItems(buyListId);
         })
         .catch(e => {
             console.log(e);
@@ -128,7 +126,7 @@ const BuyListCreator = props => {
             </div>
 
 
-            <h4><i>Add items</i></h4>
+            <h3><i>Add new items</i></h3>
 
             <div className="row">
                 <div className="col">
@@ -153,10 +151,10 @@ const BuyListCreator = props => {
                 </div>
             </div>
 
-            <h4>Copy active items from another list</h4>
+            <h4>Copy 'LATER' items from another list</h4>
             <div className="row">
                 <div className="col">
-                    <button className="m-3 btn btn-sm btn-primary" onClick={copyItemsBetweenLists}>Choose list</button>
+                    <button className="m-3 btn btn-sm btn-primary" onClick={()=>copyItemsBetweenLists(buyList.id)}>Choose list</button>
                 </div>
             </div>
 

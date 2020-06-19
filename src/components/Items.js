@@ -51,11 +51,11 @@ const Items = props => {
                             <th>Shop</th>
                             <th>Category</th>
                             <th>Name</th>
-                            <th>Source</th>
                             <th>Amount</th>
                             <th>Unit</th>
                             <th>Price</th>
                             <th>Value</th>
+                            <th>Source</th>
                             {/* <th>Date</th> */}
                         </tr>
                     </thead>
@@ -64,13 +64,13 @@ const Items = props => {
                         <ItemTableRow key={index} item={item} index={index} refresh={props.refresh}/>
                     )) }
                     <tr>
-                        <td colSpan="9">Total</td>
+                        <td colSpan="8">Total</td>
                         <td style={{textAlign: "right"}}>{total}</td>
-                        {/* <td></td> */}
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>
-            : "Lista jest pusta" }
+            : <div>Lista jest pusta<br/><br/></div> }
         </div>
     );
 };

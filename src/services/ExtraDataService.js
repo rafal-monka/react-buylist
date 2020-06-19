@@ -4,8 +4,8 @@ const copyItemsFromRecipeToBuyList = data => {
   return http.post("/extra/copyrecipe", data);
 };
 
-const copyActiveItemsFromBuyList = data => {
-  return http.post("/extra/copyactiveitems", data);
+const copyItemsBetweenLists = (sourceid, destid, status) => {
+  return http.get("/extra/copyitems/"+sourceid+"/"+destid+"/"+status);
 };
 
 const updatePrices = data => {
@@ -14,6 +14,6 @@ const updatePrices = data => {
 
 export default {
     copyItemsFromRecipeToBuyList,
-    copyActiveItemsFromBuyList,
+    copyItemsBetweenLists,
     updatePrices
 };
