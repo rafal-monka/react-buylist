@@ -73,7 +73,7 @@ const BuyList = props => {
     <div>
       {currentBuyList ? (
         <div className="edit-form">
-          <h4>BuyList</h4>
+          <h4>Shopping List</h4>
           <form>
             <div className="form-group">
               <label htmlFor="name">Name</label>

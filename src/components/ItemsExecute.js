@@ -33,7 +33,7 @@ const Table = (props) => {
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-                            <th>Shop/Cat.</th>
+                            <th>Cat./Shop</th>
                             <th>Amount</th>
                             <th>Unit</th>
                             <th>Price</th>
@@ -58,7 +58,7 @@ const Table = (props) => {
                                 :
                                 <span>{item.name}</span>}
                             </td>
-                            <td nowrap="true"><span style={{fontSize: "8px"}}>{toInitCap(item.shop)} / <b>{toInitCap(item.category)}</b></span></td>                            
+                            <td nowrap="true"><span style={{fontSize: "8px"}}><b>{toInitCap(item.category)}</b> / {toInitCap(item.shop)}</span></td>                            
                             <td style={{textAlign: "right"}}>{item.amount}</td>
                             <td>{item.unit.toLowerCase()}</td>
                             <td style={{textAlign: "right"}}>{item.price}</td>

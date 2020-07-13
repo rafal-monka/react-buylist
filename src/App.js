@@ -30,7 +30,7 @@ function App() {
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={`${process.env.PUBLIC_URL}/buylists`} className="nav-link">
-                Buy lists
+                Shop lists
               </Link>
             </li>
             <li className="nav-item">

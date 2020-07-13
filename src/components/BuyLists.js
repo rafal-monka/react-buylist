@@ -85,7 +85,7 @@ const BuyLists = () => {
 
   
       <div className="col-md-10">
-        <h4>Buy Lists</h4>
+        <h4>Shopping Lists</h4>
 
         <button className="m-3 btn btn-sm btn-success" onClick={addBuyList}>
           Add new list

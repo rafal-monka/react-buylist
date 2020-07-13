@@ -103,17 +103,17 @@ const BuyListCreator = props => {
             <div className="row">
                 <div className="col">   
                     <button className="m-3 btn btn-sm btn-primary" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/"+buyListId)} }>
-                        Edit list
+                        Edit
                     </button> 
 
                     <button className="m-3 btn btn-sm btn-success" onClick={()=>{props.history.push(process.env.PUBLIC_URL+"/buylists/execute/"+buyListId)} }>
-                        &gt; Execute list
+                        &gt; Execute
                     </button> 
                     
                     {items.length > 0 ?
                         <span> 
                             <UpdatePrices listId={buyList.id} refresh={()=>retrieveItems(buyListId)}/>
-                            <button className="m-3 btn btn-sm btn-danger" onClick={clearBuyList}>Clear list</button>
+                            <button className="m-3 btn btn-sm btn-danger" onClick={clearBuyList}>Clear</button>
                         </span>
                     : ""}
                 </div>
