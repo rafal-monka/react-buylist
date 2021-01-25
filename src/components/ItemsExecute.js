@@ -25,15 +25,15 @@ const Table = (props) => {
         <div className="row">
         {props.rows.length > 0 ? 
             <div className="col">
-                <h4>{props.status}</h4>
-                shops={JSON.stringify(props.shops)}
-                <br/>categories={JSON.stringify(props.categories)}                 
+                {/* <h4>{props.status}</h4> */}
+                {/* shops={JSON.stringify(props.shops)} */}
+                {/* <br/>categories={JSON.stringify(props.categories)}                  */}
                 <table className="table table-striped table-bordered table-hover table-sm">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-                            <th>Cat./Shop</th>
+                            <th>Category</th>
                             <th>Amount</th>
                             <th>Unit</th>
                             <th>Price</th>
@@ -58,7 +58,7 @@ const Table = (props) => {
                                 :
                                 <span>{item.name}</span>}
                             </td>
-                            <td nowrap="true"><span style={{fontSize: "8px"}}><b>{toInitCap(item.category)}</b> / {toInitCap(item.shop)}</span></td>                            
+                            <td nowrap="true">{toInitCap(item.category)}</td>                            
                             <td style={{textAlign: "right"}}>{item.amount}</td>
                             <td>{item.unit.toLowerCase()}</td>
                             <td style={{textAlign: "right"}}>{item.price}</td>
@@ -82,13 +82,23 @@ const Table = (props) => {
 
 const ItemsExecute = props => {
     let items = props.items.filter(item => item.status===props.status);
-    const shops = [...new Set( items.map(obj => toInitCap(obj.shop))) ];
+    const shops = [...new Set( items.map(obj => toInitCap(obj.shop))) ].sort((a, b) => a > b ? 1: -1);
     const categories = [...new Set( items.map(obj => toInitCap(obj.category))) ];
+
+    const total = Math.round(props.items.filter(item => item.status === props.status).reduce((a,b) => +a + +b.value, 0)*10)/10;
 
     return (
         <div>
-            {/* status={props.status}    <br/> */}    
-            <Table rows={items} refresh={props.refresh} status={props.status} shops={shops} categories={categories}/>
+            <h4>{props.status}, total={ total }</h4>
+            { shops.map( (shop, index) => {
+                let shopItems = items.filter(item => toInitCap(item.shop)===shop)                
+                return (
+                    <div>
+                        <br/><h5><span style={{color: "blue"}}>{shop}</span></h5>
+                        <Table rows={shopItems} refresh={props.refresh} status={props.status} shops={shops} categories={categories}/>
+                    </div>
+                )
+            }) }
         </div>
     );
 };

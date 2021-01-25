@@ -61,7 +61,7 @@ const BuyListExecute = props => {
             </div>
 
             <div className="row">
-                <div className="col">   
+                <div className="col">                       
                     <ItemsExecute items={items} buyListId={buyListId} refresh={refreshList} status="ACTIVE"/>
                 </div>
             </div>
@@ -75,7 +75,7 @@ const BuyListExecute = props => {
             </div>
 
             <div className="row">
-                <div className="col">   
+                <div className="col">  
                     <ItemsExecute items={items} buyListId={buyListId} refresh={refreshList} status="BOUGHT"/>
                 </div>
             </div>
