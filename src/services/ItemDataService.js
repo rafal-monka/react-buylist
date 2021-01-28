@@ -28,6 +28,10 @@ const updateItemStatus = (id, newStatus) => {
   return http.put(`/items/${id}`, {status: newStatus});
 };
 
+const updateItem = (id, newItem) => {
+  return http.put(`/items/${id}`, newItem);
+};
+
 export default {
   create, 
   getItems, 
@@ -35,5 +39,6 @@ export default {
   updateItemName,
   updateItemAmount,
   updateItemStatus,
+  updateItem,
   deleteAllItemsFromList
 };
