@@ -62,7 +62,8 @@ const ItemTableRow = props => {
             if (response.data.length > 0) {
                 html = '<br>'
                 response.data.forEach(item => {
-                    html += item.product+'<ul>'
+                    html += '<a target="_blank" href="'+item.url+'">'+item.product+'</a>'
+                    html += '<ul>'
                     item.magazines.forEach(magazine => {
                         html += '<li><a target="_blank" href="'+magazine.url+'">'+magazine.title+'</a></li>'
                     })
@@ -89,7 +90,7 @@ const ItemTableRow = props => {
                 <button className="badge badge-danger" onClick={() => deleteItem(item)}>-</button>
             </td>
             <td><span onClick={() => editItemProperty(item, 'shop')}>{item.shop}</span></td>
-            <td>{item.category}</td>
+            <td>{item.category.toLowerCase()}</td>
             <td nowrap="true"><span onClick={() => editItemProperty(item, 'name')}>{item.name}</span></td>
             <td nowrap="true" style={{textAlign: "right"}}>
             <span>{item.amount}</span>&nbsp;&nbsp;<button className="badge badge-primary" onClick={()=>changeValue(item, -1)}>-</button>&nbsp;<button className="badge badge-primary" onClick={()=>changeValue(item, 1)}>+</button>
@@ -97,6 +98,7 @@ const ItemTableRow = props => {
             <td><span onClick={() => editItemProperty(item, 'unit')}>{item.unit.toLowerCase()}</span></td>
             <td style={{textAlign: "right"}}><span onClick={() => editItemProperty(item, 'price')}>{item.price}</span></td>
             <td style={{textAlign: "right"}}><b>{item.value}</b></td>
+            <td nowrap="false"><span style={{fontFamily: "courier"}}>{item.status}</span></td>
             <td nowrap="false"><i>{item.source}</i></td>
             <td nowrap="false">
                 <button className="badge badge-info" onClick={()=>showPromotions(item)}>?</button>

@@ -9,13 +9,23 @@ const Items = props => {
 //console.log(tmp);  
 //    const [amounts, setAmounts] = useState(tmp);
     const [items, setItems] = useState([]);
+    const [sortBy, setSortBy] = useState('');
 
     useEffect(() => {
-        // console.log(props.items);
-        setItems(filteredItems);
+        let items
+        if (sortBy !== '') {
+            items = filteredItems.sort((a,b) => a[sortBy].toUpperCase() > b[sortBy].toUpperCase() ? 1 : -1)
+        } else {
+            items = filteredItems
+        }
+        setItems(items);
         // console.log(items);
-    }, [filteredItems]);
+    }, [filteredItems, sortBy]);
 
+    const sort = (property) => {
+        setSortBy(property)
+        props.refresh()
+    }
     //delete item from list
     // const deleteItem = item => {
     //     ItemDataService.deleteItem(item.id) 
@@ -48,14 +58,15 @@ const Items = props => {
                         <tr>
                             <th>No</th>
                             <th></th>
-                            <th>Shop</th>
-                            <th>Category</th>
-                            <th>Name</th>
+                            <th><button onClick={()=>sort('shop')}>Shop</button></th>
+                            <th><button onClick={()=>sort('category')}>Category</button></th>
+                            <th><button onClick={()=>sort('name')}>Name</button></th>
                             <th>Amount</th>
                             <th>Unit</th>
                             <th>Price</th>
                             <th>Value</th>
-                            <th>Source</th>
+                            <th><button onClick={()=>sort('status')}>Status</button></th>
+                            <th><button onClick={()=>sort('source')}>Source</button></th>
                             <th>Promotions</th>
                             {/* <th>Date</th> */}
                         </tr>
@@ -67,7 +78,7 @@ const Items = props => {
                     <tr>
                         <td colSpan="8">Total</td>
                         <td style={{textAlign: "right"}}><b>{total}</b></td>
-                        <td colSpan="2"></td>
+                        <td colSpan="3"></td>
                     </tr>
                     </tbody>
                 </table>
