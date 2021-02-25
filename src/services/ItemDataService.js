@@ -32,6 +32,10 @@ const updateItem = (id, newItem) => {
   return http.put(`/items/${id}`, newItem);
 };
 
+const getPromotions = (name) => {
+  return http.get(`/extra/promotion/${name}`);
+};
+
 export default {
   create, 
   getItems, 
@@ -40,5 +44,6 @@ export default {
   updateItemAmount,
   updateItemStatus,
   updateItem,
-  deleteAllItemsFromList
+  deleteAllItemsFromList,
+  getPromotions
 };

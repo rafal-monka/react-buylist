@@ -52,6 +52,35 @@ const ItemTableRow = props => {
 
     }
 
+    const showPromotions = (item) => {
+        let doc = document.getElementById(item.id)
+        doc.innerHTML = '...' 
+        ItemDataService.getPromotions(item.name) 
+        .then(response => {
+            //render promotions
+            let html = 'brak'
+            if (response.data.length > 0) {
+                html = '<br>'
+                response.data.forEach(item => {
+                    html += item.product+'<ul>'
+                    item.magazines.forEach(magazine => {
+                        html += '<li><a target="_blank" href="'+magazine.url+'">'+magazine.title+'</a></li>'
+                    })
+                    html += '</ul>'
+                })
+            }
+            doc.innerHTML = html
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }       
+    
+    const hidePromotions = (item) => {
+        let doc = document.getElementById(item.id)
+        doc.innerHTML = ''
+    } 
+
     return (
         (item) ?         
             <tr key={index} style={{color: item.amount > 0.0 ? "black": "red"}}>
@@ -68,7 +97,12 @@ const ItemTableRow = props => {
             <td><span onClick={() => editItemProperty(item, 'unit')}>{item.unit.toLowerCase()}</span></td>
             <td style={{textAlign: "right"}}><span onClick={() => editItemProperty(item, 'price')}>{item.price}</span></td>
             <td style={{textAlign: "right"}}><b>{item.value}</b></td>
-            <td nowrap="true"><i>{item.source}</i></td>
+            <td nowrap="false"><i>{item.source}</i></td>
+            <td nowrap="false">
+                <button className="badge badge-info" onClick={()=>showPromotions(item)}>?</button>
+                &nbsp;<button className="badge" onClick={()=>hidePromotions(item)}>-</button>
+                <span id={item.id}></span>
+            </td>
             {/* <td nowrap="true">{item.createdAt} / {item.updatedAt}</td> */}
             </tr>
         : ""
